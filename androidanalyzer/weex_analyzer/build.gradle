@@ -1,0 +1,75 @@
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.android.tools.build:gradle:2.3.0'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+//    }
+//}
+//
+//allprojects {
+//    repositories {
+//        jcenter()
+//
+//       maven {
+//           url "http://mvnrepo.alibaba-inc.com/mvn/repository"
+//       }
+//    }
+//}
+//
+//
+apply plugin: 'com.android.library'
+
+//apply from: 'jacoco.gradle'
+
+android {
+    compileSdkVersion 26
+//    buildToolsVersion '26.0.0'
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled = true
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+//apply from: 'binary.gradle'
+//apply from: 'maven.gradle'
+
+dependencies {
+//    provided 'com.taobao.android:weex_sdk:0.9.5'
+    implementation project(':weex_sdk')
+    provided 'com.android.support:recyclerview-v7:26.1.0'
+    provided 'com.alibaba:fastjson:1.1.46.android'
+    provided 'com.android.support:support-v4:26.1.0'
+    testCompile 'junit:junit:4.12'
+
+    testCompile 'org.mockito:mockito-core:1.9.5'
+
+    testCompile "org.robolectric:robolectric:3.1.4"
+    testCompile "org.robolectric:shadows-support-v4:3.1.4"
+    testCompile "org.powermock:powermock-module-junit4:1.6.4"
+    testCompile "org.powermock:powermock-module-junit4-rule:1.6.4"
+    testCompile "org.powermock:powermock-api-mockito:1.6.4"
+}
